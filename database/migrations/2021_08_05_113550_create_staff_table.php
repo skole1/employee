@@ -16,7 +16,7 @@ class CreateStaffTable extends Migration
         Schema::create('staff', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->foreignId('user_id')->nullable();
-            $table->string('file');
+            $table->string('image_upload', 100)->default('');
             $table->string('psn_no');
             $table->string('nin_no');
             $table->string('grade_level');

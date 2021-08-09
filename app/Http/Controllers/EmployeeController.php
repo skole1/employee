@@ -31,6 +31,7 @@ class EmployeeController extends Controller
     {
         $request->validate([
             'user_id' => ['nullable'],
+            'image_upload' => 'required|image',
             'psn_no' => 'required',
             'nin_no' => 'required',
             'grade_level' => 'required',
@@ -50,8 +51,12 @@ class EmployeeController extends Controller
             'next_kin_address' => 'required',
         ]);
 
+        $image = $request->file('file');
+        $user_image = time() . '.' . $image->extension();
+        $image->move(public_path('images'), $user_image);
         $data = [
             'user_id' => mt_rand(),
+            'image_upload' => $user_image,
             'psn_no' => $request->input('psn_no'),
             'nin_no' => $request->input('nin_no'),
             'grade_level' => $request->input('grade_level'),
